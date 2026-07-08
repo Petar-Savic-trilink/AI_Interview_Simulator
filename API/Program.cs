@@ -1,4 +1,6 @@
+using Application.Interfaces;
 using Application.Questions.Queries;
+using Infrastructure.OpenRouterServices;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
@@ -13,6 +15,12 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 });
 builder.Services.AddCors();
 builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblyContaining<GetQuestionList.Handler>());
+builder.Services.AddLogging();
+builder.Services.AddHttpClient("OpenRouter", client =>
+{
+    client.BaseAddress = new Uri(builder.Configuration["OpenRouter:BaseUrl"]!);
+});
+builder.Services.AddScoped<IOpenRouterService, OpenRouterService>();
 
 var app = builder.Build();
 
@@ -33,7 +41,7 @@ try
 }
 catch (Exception ex)
 {
-    var logger = services.GetRequiredService<ILogger>();
+    var logger = services.GetRequiredService<ILogger<Program>>();
     logger.LogError(ex, "An error occured during migration");
 }
 

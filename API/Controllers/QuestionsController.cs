@@ -14,5 +14,11 @@ namespace API.Controllers
         {
             return await mediator.Send(new GetQuestionList.Query());
         }
+
+        [HttpGet("ask")]
+        public async Task<ActionResult<string>> GetAnswerToTheQuestion(string message)
+        {
+            return await mediator.Send(new GetAnswerToTheQuestion.Query { Message = message });
+        }
     }
 }
