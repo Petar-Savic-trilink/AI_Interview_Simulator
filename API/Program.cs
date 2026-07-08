@@ -1,3 +1,4 @@
+using Application.Questions.Queries;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 
@@ -10,6 +11,8 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+builder.Services.AddCors();
+builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblyContaining<GetQuestionList.Handler>());
 
 var app = builder.Build();
 
@@ -17,6 +20,7 @@ var app = builder.Build();
 
 
 app.MapControllers();
+app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000"));
 
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
