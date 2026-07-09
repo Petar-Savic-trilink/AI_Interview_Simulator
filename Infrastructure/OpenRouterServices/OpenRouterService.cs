@@ -34,11 +34,11 @@ namespace Infrastructure.OpenRouterServices
                 messages = new[]
                 {
                 new
-                {
-                    role = "user",
-                    content = prompt
+                    {
+                        role = "user",
+                        content = prompt
+                    }
                 }
-            }
             };
 
             var response = await _httpClient.PostAsJsonAsync(
