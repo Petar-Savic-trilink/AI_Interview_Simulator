@@ -10,5 +10,6 @@ namespace Persistence
     public class AppDbContext(DbContextOptions options) : IdentityDbContext<User>(options)
     {
         public DbSet<Question> Questions { get; set; }
+        public DbSet<Quiz> Quizzes { get; set; }
     }
 }

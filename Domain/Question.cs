@@ -12,5 +12,9 @@ namespace Domain
         public required string IdealAnswer { get; set; }
         public required string Missing { get; set; }
         public int Score { get; set; }
+
+
+        public required string QuizId { get; set; }
+        public Quiz Quiz { get; set; } = null!;
     }
 }

@@ -11,5 +11,7 @@ namespace Domain
         public string? LastName { get; set; }
         public string? Description { get; set; }
         public string? ImageUrl { get; set; }
+
+        public ICollection<Quiz> Quizzes { get; set; } = [];
     }
 }

@@ -20,7 +20,8 @@ namespace Persistence
                         FirstName="Petar",
                         LastName="Savic",
                         UserName="petar@test.com",
-                        Email="petar@test.com"
+                        Email="petar@test.com",
+                        Id="petarId"
                     },
                     new User
                     {
@@ -44,7 +45,17 @@ namespace Persistence
                 }
             }
 
-
+            if (!context.Quizzes.Any())
+            {
+                await context.Quizzes.AddAsync(new Quiz
+                {
+                    Id = "a",
+                    Title = "a",
+                    LearningRecomendations = "a",
+                    Score = 3,
+                    UserId = "petarId"
+                });
+            } 
 
             if (context.Questions.Any()) return;
 
@@ -56,7 +67,8 @@ namespace Persistence
                     Answer = "Answer1",
                     IdealAnswer = "IdealAnswer1",
                     Missing = "Missing1",
-                    Score = 0
+                    Score = 0,
+                    QuizId = "a"
                 },
                 new Question
                 {
@@ -64,7 +76,8 @@ namespace Persistence
                     Answer = "Answer2",
                     IdealAnswer = "IdealAnswer2",
                     Missing = "Missing2",
-                    Score = 0
+                    Score = 0,
+                    QuizId = "a"
                 },
                 new Question
                 {
@@ -72,7 +85,8 @@ namespace Persistence
                     Answer = "Answer3",
                     IdealAnswer = "IdealAnswer3",
                     Missing = "Missing3",
-                    Score = 0
+                    Score = 0,
+                    QuizId = "a"
                 },
                 new Question
                 {
@@ -80,7 +94,8 @@ namespace Persistence
                     Answer = "Answer4",
                     IdealAnswer = "IdealAnswer4",
                     Missing = "Missing4",
-                    Score = 0
+                    Score = 0,
+                    QuizId = "a"
                 },
                 new Question
                 {
@@ -88,7 +103,8 @@ namespace Persistence
                     Answer = "Answer5",
                     IdealAnswer = "IdealAnswer5",
                     Missing = "Missing5",
-                    Score = 0
+                    Score = 0,
+                    QuizId = "a"
                 },
                 new Question
                 {
@@ -96,7 +112,8 @@ namespace Persistence
                     Answer = "Answer6",
                     IdealAnswer = "IdealAnswer6",
                     Missing = "Missing6",
-                    Score = 0
+                    Score = 0,
+                    QuizId = "a"
                 },
                 new Question
                 {
@@ -104,7 +121,8 @@ namespace Persistence
                     Answer = "Answer7",
                     IdealAnswer = "IdealAnswer7",
                     Missing = "Missing7",
-                    Score = 0
+                    Score = 0,
+                    QuizId = "a"
                 },
                 new Question
                 {
@@ -112,7 +130,8 @@ namespace Persistence
                     Answer = "Answer8",
                     IdealAnswer = "IdealAnswer8",
                     Missing = "Missing8",
-                    Score = 0
+                    Score = 0,
+                    QuizId = "a"
                 },
                 new Question
                 {
@@ -120,7 +139,8 @@ namespace Persistence
                     Answer = "Answer9",
                     IdealAnswer = "IdealAnswer9",
                     Missing = "Missing9",
-                    Score = 0
+                    Score = 0,
+                    QuizId = "a"
                 },
                 new Question
                 {
@@ -128,7 +148,8 @@ namespace Persistence
                     Answer = "Answer10",
                     IdealAnswer = "IdealAnswer10",
                     Missing = "Missing10",
-                    Score = 0
+                    Score = 0,
+                    QuizId = "a"
                 }
             };
 

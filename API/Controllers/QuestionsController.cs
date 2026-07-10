@@ -8,19 +8,18 @@ using Persistence;
 
 namespace API.Controllers
 {
-    public class QuestionsController(AppDbContext context, IMediator mediator) : BaseApiController
+    public class QuestionsController : BaseApiController
     {
         [HttpGet]
         public async Task<ActionResult<List<Question>>> GetQuestions()
         {
-            return await mediator.Send(new GetQuestionList.Query());
+            return await Mediator.Send(new GetQuestionList.Query());
         }
 
-        [Authorize]
         [HttpGet("ask")]
         public async Task<ActionResult<string>> GetAnswerToTheQuestion(string message)
         {
-            return await mediator.Send(new GetAnswerToTheQuestion.Query { Message = message });
+            return await Mediator.Send(new GetAnswerToTheQuestion.Query { Message = message });
         }
     }
 }

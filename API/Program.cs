@@ -1,3 +1,4 @@
+using Application.Core;
 using Application.Interfaces;
 using Application.Questions.Queries;
 using Domain;
@@ -27,6 +28,8 @@ builder.Services.AddIdentityApiEndpoints<User>(opt =>
 {
     opt.User.RequireUniqueEmail = true;
 }).AddRoles<IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+
+builder.Services.AddAutoMapper(x => x.AddMaps(typeof(MappingProfiles).Assembly));
 
 builder.Services.AddLogging();
 builder.Services.AddHttpClient("OpenRouter", client =>
