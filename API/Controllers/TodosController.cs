@@ -17,27 +17,25 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<List<GetTodoDto>>> GetTodoList()
         {
-            return await Mediator.Send(new GetTodoList.Query { });
+            return HandleResult(await Mediator.Send(new GetTodoList.Query { }));
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<GetTodoDto>> GetTodoById(string id)
         {
-            return await Mediator.Send(new GetTodo.Query { TodoId = id });
+            return HandleResult(await Mediator.Send(new GetTodo.Query { TodoId = id }));
         }
 
         [HttpPut("{id}")]
         public async Task<ActionResult> EditTodo(CreateTodoDto todo, [FromRoute] string id)
         {
-            await Mediator.Send(new EditTodo.Command { TodoDto = todo, TodoId = id });
-            return NoContent();
+            return HandleResult(await Mediator.Send(new EditTodo.Command { TodoDto = todo, TodoId = id }));
         }
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteTodo(string id)
         {
-            await Mediator.Send(new DeleteTodo.Command { TodoId = id });
-            return NoContent();
+            return HandleResult(await Mediator.Send(new DeleteTodo.Command { TodoId = id }));
         }
     }
 }

@@ -26,19 +26,25 @@ namespace Infrastructure.OpenRouterServices
             _httpClient.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("Bearer", apiKey);
 
-            Console.WriteLine(_httpClient.BaseAddress);
+            var messages = new[]
+            {
+                new
+                {
+                    role = "user",
+                    content = "Hocu da odgovaras jasno i stalozeno kao da radis intervju, takodje bez dekoracije teksta, crtica, tackica i ostalih stvari. Samo plain tekst." +
+                    "Hocu da objasnis lepo sta god je pitano i da na kraju svakog odgovora stavis ', Gospodine!'"
+                },
+                new
+                {
+                    role = "user",
+                    content = prompt
+                }
+            };
 
             var request = new
             {
                 model = "poolside/laguna-xs-2.1:free",
-                messages = new[]
-                {
-                new
-                    {
-                        role = "user",
-                        content = prompt
-                    }
-                }
+                messages
             };
 
             var response = await _httpClient.PostAsJsonAsync(
