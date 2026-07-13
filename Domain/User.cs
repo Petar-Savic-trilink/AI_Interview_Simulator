@@ -13,5 +13,6 @@ namespace Domain
         public string? ImageUrl { get; set; }
 
         public ICollection<Quiz> Quizzes { get; set; } = [];
+        public ICollection<Todo> Todos { get; set; } = [];
     }
 }

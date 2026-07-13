@@ -10,27 +10,12 @@ const DashboardQuizzes = () => {
                 <Button variant="contained" startIcon={<Add />}><Typography>Start new</Typography></Button>
             </Box>
             <Divider sx={{ mt: 2 }} />
-            <Grid container spacing={2} sx={{ m: 2 }}>
+            <Grid container spacing={2} sx={{ p: 2 }}>
                 <Grid size={6}>
                     <QuizCard />
                 </Grid>
                 <Grid size={6}>
                     <QuizCard />
-                </Grid>
-                <Grid size={6}>
-                    <Box sx={{ backgroundColor: 'blue' }}>a</Box>
-                </Grid>
-                <Grid size={6}>
-                    <Box sx={{ backgroundColor: 'blue' }}>a</Box>
-                </Grid>
-                <Grid size={6}>
-                    <Box sx={{ backgroundColor: 'blue' }}>a</Box>
-                </Grid>
-                <Grid size={6}>
-                    <Box sx={{ backgroundColor: 'blue' }}>a</Box>
-                </Grid>
-                <Grid size={6}>
-                    <Box sx={{ backgroundColor: 'blue' }}>a</Box>
                 </Grid>
             </Grid>
         </Paper>

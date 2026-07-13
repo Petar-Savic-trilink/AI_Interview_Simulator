@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Application.Todos.DTOs;
+using AutoMapper;
 using Domain;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,8 @@ namespace Application.Core
     {
         public MappingProfiles()
         {
-            CreateMap<User, User>();
+            CreateMap<CreateTodoDto, Todo>();
+            CreateMap<Todo, GetTodoDto>();
         }
     }
 }

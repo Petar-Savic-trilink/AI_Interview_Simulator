@@ -1,24 +1,17 @@
-import { AppBar, Box, Button, IconButton, Toolbar, Typography } from "@mui/material"
-import MenuOutlined from '@mui/icons-material/MenuOutlined'
+import { AppBar, Avatar, Box, Toolbar, Typography } from "@mui/material"
+import { NavLink } from "react-router-dom"
 
 const NavBar = () => {
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="fixed" sx={{height:'auto'}}>
-                <Toolbar sx={{height: 48}}>
-                    <IconButton
-                        size="medium"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                        sx={{ mr: 2 }}
-                    >
-                        <MenuOutlined />
-                    </IconButton>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        News
-                    </Typography>
-                    <Button color="inherit">Login</Button>
+            <AppBar position="fixed" sx={{ height: 'auto' }}>
+                <Toolbar sx={{display: 'flex', width: '100%', justifyContent: 'space-between'}}>
+                    <Box sx={{display: 'flex', alignItems: 'center', gap: 3}}>
+                        <Typography component={NavLink} to={'/dashboard'} sx={{ fontSize:18, textDecoration: 'none', color: 'inherit', '&.active': { textDecoration: 'underline', fontWeight: 'bold' } }}>Home</Typography>
+                        <Typography component={NavLink} to={'/todos'} sx={{ fontSize:18, textDecoration: 'none', color: 'inherit', '&.active': { textDecoration: 'underline', fontWeight: 'bold' } }}>Todos</Typography>
+                        <Typography component={NavLink} to={'/quizzes'} sx={{ fontSize:18, textDecoration: 'none', color: 'inherit', '&.active': { textDecoration: 'underline', fontWeight: 'bold' } }}>Quizzes</Typography>
+                    </Box>
+                    <Avatar sx={{float: 'right'}} />
                 </Toolbar>
             </AppBar>
         </Box>

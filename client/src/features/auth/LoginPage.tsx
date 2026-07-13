@@ -1,15 +1,15 @@
 import { Box, Button, Paper, TextField, Typography } from "@mui/material"
 import { useState } from "react"
-import { httpAgent } from "../lib/utils/httpAgent";
+import { useAuth } from "../../lib/hooks/useAuth";
 
 const LoginPage = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const {login} = useAuth();
 
     const handleSubmit = async () => {
         console.log(email, password)
-
-        await httpAgent.post("/login?useCookies=true", {email, password});
+        await login.mutateAsync({email, password});
     }
 
   return (

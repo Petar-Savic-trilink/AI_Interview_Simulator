@@ -1,8 +1,12 @@
+using API.Middleware;
 using Application.Core;
 using Application.Interfaces;
 using Application.Questions.Queries;
+using Application.Todos.Validators;
 using Domain;
+using FluentValidation;
 using Infrastructure.OpenRouterServices;
+using Infrastructure.Security;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -23,24 +27,31 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 builder.Services.AddCors();
-builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblyContaining<GetQuestionList.Handler>());
+builder.Services.AddMediatR(x =>
+{
+    x.RegisterServicesFromAssemblyContaining<GetQuestionList.Handler>();
+    x.AddOpenBehavior(typeof(ValidationBehavior<,>));
+});
 builder.Services.AddIdentityApiEndpoints<User>(opt =>
 {
     opt.User.RequireUniqueEmail = true;
 }).AddRoles<IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
 builder.Services.AddAutoMapper(x => x.AddMaps(typeof(MappingProfiles).Assembly));
-
+builder.Services.AddValidatorsFromAssemblyContaining<CreateTodoValidator>();
 builder.Services.AddLogging();
 builder.Services.AddHttpClient("OpenRouter", client =>
 {
     client.BaseAddress = new Uri(builder.Configuration["OpenRouter:BaseUrl"]!);
 });
 builder.Services.AddScoped<IOpenRouterService, OpenRouterService>();
+builder.Services.AddScoped<IUserAccessor, UserAccessor>();
+builder.Services.AddTransient<ExceptionMiddleware>();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseAuthentication();
 app.UseAuthorization();
